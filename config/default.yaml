@@ -1,0 +1,44 @@
+# ai-cartoonizer-generator — default runtime config
+app:
+  name: "AI Cartoonizer Generator"
+  version: "0.9.4"
+  theme: "dark"
+
+runtime:
+  backend: "onnxruntime"        # onnxruntime | onnxruntime-gpu | opencv-classic
+  device: "auto"                # auto | cpu | cuda | dml
+  thread_count: 0               # 0 = let ORT decide
+  fp16: true
+
+pipeline:
+  tile_size: 512                # split large frames to bound VRAM
+  tile_overlap: 32
+  max_dimension: 4096           # upscale ceiling for preview
+  face_restore: false
+  upscale_factor: 1.0           # 1.0 | 2.0 | 4.0
+
+styles:
+  default: "anime_shonen_v3"
+  available:
+    - id: "anime_shonen_v3"
+      label: "Anime (Shonen)"
+      weight: "models/weights/anime_shonen_v3.onnx"
+    - id: "ghibli_soft_v2"
+      label: "Soft Ghibli"
+      weight: "models/weights/ghibli_soft_v2.onnx"
+    - id: "comic_ink_v1"
+      label: "Comic Ink"
+      weight: "models/weights/comic_ink_v1.onnx"
+    - id: "pixar_lite_v1"
+      label: "Pixar-Lite"
+      weight: "models/weights/pixar_lite_v1.onnx"
+
+video:
+  codec: "mp4v"
+  crf: 18
+  audio_copy: true
+
+paths:
+  models_dir: "models/weights"
+  output_dir: "output"
+  cache_dir: "cache"
