@@ -1,0 +1,1 @@
+"""Services layer — inference, model loading, UI, and weight management."""
